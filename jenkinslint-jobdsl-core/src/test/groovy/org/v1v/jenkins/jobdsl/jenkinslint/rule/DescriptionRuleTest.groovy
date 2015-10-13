@@ -4,6 +4,7 @@ import javaposse.jobdsl.dsl.FileJobManagement
 import javaposse.jobdsl.dsl.Item
 import javaposse.jobdsl.dsl.jobs.BuildFlowJob
 import javaposse.jobdsl.dsl.jobs.FreeStyleJob
+import javaposse.jobdsl.dsl.jobs.IvyJob
 import javaposse.jobdsl.dsl.jobs.MatrixJob
 import javaposse.jobdsl.dsl.jobs.MavenJob
 import javaposse.jobdsl.dsl.jobs.MultiJob
@@ -60,6 +61,13 @@ class DescriptionRuleTest {
     }
 
     @Test
+    void testIvyJobWithoutDescription() {
+        Item job = new IvyJob()
+        DescriptionRule rule = new DescriptionRule()
+        assert rule.isDefect(job)
+    }
+
+    @Test
     void testFreeStyleJobWithDescription() {
         Item job = new FreeStyleJob()
         job.description('something')
@@ -106,4 +114,13 @@ class DescriptionRuleTest {
         job.description('something')
         assert !rule.isDefect(job)
     }
+
+    @Test
+    void testIvyJobWithDescription() {
+        Item job = new IvyJob()
+        DescriptionRule rule = new DescriptionRule()
+        job.description('something')
+        assert !rule.isDefect(job)
+    }
+
 }
