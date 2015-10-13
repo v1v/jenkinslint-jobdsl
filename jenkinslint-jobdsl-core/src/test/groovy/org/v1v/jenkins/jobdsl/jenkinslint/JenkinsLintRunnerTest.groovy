@@ -8,11 +8,11 @@ import org.junit.Test
 import static org.v1v.jenkins.jobdsl.jenkinslint.TestUtil.shouldFailWithMessageContaining
 
 /**
- * Tests for Lint runner
+ * Tests for JenkinsLint runner
  *
  * @author victor.martinez.
  */
-class LintRunnerTest {
+class JenkinsLintRunnerTest {
 
     private static final SOURCE_DIRS = ['abc']
 

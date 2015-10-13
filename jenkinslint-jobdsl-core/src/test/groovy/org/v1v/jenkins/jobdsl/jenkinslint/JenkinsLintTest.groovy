@@ -9,11 +9,11 @@ import static org.v1v.jenkins.jobdsl.jenkinslint.TestUtil.captureSystemOut
 import static org.v1v.jenkins.jobdsl.jenkinslint.TestUtil.shouldFailWithMessageContaining
 
 /**
- * Tests for Lint command-line runner
+ * Tests for JenkinsLint command-line runner
  *
  * @author victor.martinez.
  */
-class LintTest {
+class JenkinsLintTest {
 
     private static final BASE_DIR = 'src/test/resources'
     private static final INCLUDES = 'sourcewithdirs/**/*.groovy'
@@ -120,7 +120,7 @@ class LintTest {
         final ARGS = [
                 "-basedir=$BASE_DIR", "-includes=$INCLUDES",
                 "-excludes=$EXCLUDES"] as String[]
-        Lint.main(ARGS)
+        JenkinsLint.main(ARGS)
         assert exitCode == 0
     }
 
@@ -128,11 +128,11 @@ class LintTest {
     void testMain_Help() {
         final ARGS = ['-help'] as String[]
         def stdout = captureSystemOut {
-            Lint.main(ARGS)
+            JenkinsLint.main(ARGS)
         }
         log("stdout=[$stdout]")
         assert !stdout.contains('ERROR')
-        assert stdout.contains(Lint.HELP)
+        assert stdout.contains(JenkinsLint.HELP)
         assert exitCode == 0
     }
 
@@ -140,11 +140,11 @@ class LintTest {
     void testMain_BadOptionFormat() {
         final ARGS = ["-excludes=$EXCLUDES", '&^%#BAD%$#'] as String[]
         def stdout = captureSystemOut {
-            Lint.main(ARGS)
+            JenkinsLint.main(ARGS)
         }
         log("stdout=[$stdout]")
         assert stdout.contains(ARGS[1])
-        assert stdout.contains(Lint.HELP)
+        assert stdout.contains(JenkinsLint.HELP)
         assert exitCode == 1
     }
 
@@ -152,11 +152,11 @@ class LintTest {
     void testMain_UnknownOption() {
         final ARGS = ['-unknown=23', "-excludes=$EXCLUDES"] as String[]
         def stdout = captureSystemOut {
-            Lint.main(ARGS)
+            JenkinsLint.main(ARGS)
         }
         log("stdout=[$stdout]")
         assert stdout.contains(ARGS[0])
-        assert stdout.contains(Lint.HELP)
+        assert stdout.contains(JenkinsLint.HELP)
         assert exitCode == 1
     }
 
@@ -166,7 +166,7 @@ class LintTest {
 
     @Before
     void setUp() {
-        lint = new Lint()
+        lint = new JenkinsLint()
         lint.systemExit = { code -> exitCode = code }
     }
 

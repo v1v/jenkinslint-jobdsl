@@ -2,9 +2,9 @@ package org.v1v.jenkins.jobdsl.jenkinslint
 
 import java.util.logging.Logger
 
-class Lint {
+class JenkinsLint {
 
-    private static final Logger LOG = Logger.getLogger(Lint.class.getName());
+    private static final Logger LOG = Logger.getLogger(JenkinsLint.class.getName());
 
     protected static final HELP = """JenkinsLint - static analysis for JobDSL',
 Usage: java Jenkins [OPTIONS]
@@ -42,7 +42,7 @@ Usage: java Jenkins [OPTIONS]
      * @param args - the String[] of command-line arguments
      */
     static void main(String[] args) {
-        def lint = new Lint()
+        def lint = new JenkinsLint()
 
         if (args == ['-help'] as String[]) {
             println HELP

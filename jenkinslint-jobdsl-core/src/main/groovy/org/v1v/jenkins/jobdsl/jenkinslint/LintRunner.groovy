@@ -21,7 +21,7 @@ class LintRunner {
             println it.name
         }
 
-        def resultsMessage = "Lint completed: ${elapsedTime}ms"
+        def resultsMessage = "JenkinsLint completed: ${elapsedTime}ms"
         println resultsMessage
     }
 
