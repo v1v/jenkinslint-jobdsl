@@ -9,6 +9,7 @@ import javaposse.jobdsl.dsl.jobs.MatrixJob
 import javaposse.jobdsl.dsl.jobs.MavenJob
 import javaposse.jobdsl.dsl.jobs.MultiJob
 import javaposse.jobdsl.dsl.jobs.WorkflowJob
+import org.junit.Before
 import org.junit.Test
 
 /**
@@ -18,52 +19,52 @@ import org.junit.Test
  */
 class DescriptionRuleTest {
 
+    private rule
+
+    @Before
+    void setUp() {
+        rule = new DescriptionRule()
+    }
+
     @Test
     void testFreeStyleJobWithoutDescription() {
         Item job = new FreeStyleJob()
-        DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
     }
 
     @Test
     void testMavenJobWithoutDescription() {
         Item job = new MavenJob(new FileJobManagement(new File(".")))
-        DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
     }
 
     @Test
     void testMatrixJobWithoutDescription() {
         Item job = new MatrixJob()
-        DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
     }
 
     @Test
     void testMultiJobWithoutDescription() {
         Item job = new MultiJob(new FileJobManagement(new File(".")))
-        DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
     }
 
     @Test
     void testWorkflowJobWithoutDescription() {
         Item job = new WorkflowJob()
-        DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
     }
 
     @Test
     void testBuildFlowJobWithoutDescription() {
         Item job = new BuildFlowJob()
-        DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
     }
 
     @Test
     void testIvyJobWithoutDescription() {
         Item job = new IvyJob()
-        DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
     }
 
@@ -71,7 +72,6 @@ class DescriptionRuleTest {
     void testFreeStyleJobWithDescription() {
         Item job = new FreeStyleJob()
         job.description('something')
-        DescriptionRule rule = new DescriptionRule()
         assert !rule.isDefect(job)
     }
 
@@ -79,7 +79,6 @@ class DescriptionRuleTest {
     void testMavenJobWithDescription() {
         Item job = new MavenJob(new FileJobManagement(new File(".")))
         job.description('something')
-        DescriptionRule rule = new DescriptionRule()
         assert !rule.isDefect(job)
     }
 
@@ -87,14 +86,12 @@ class DescriptionRuleTest {
     void testMatrixJobWithDescription() {
         Item job = new MatrixJob()
         job.description('something')
-        DescriptionRule rule = new DescriptionRule()
         assert !rule.isDefect(job)
     }
 
     @Test
     void testMultiJobWithDescription() {
         Item job = new MultiJob(new FileJobManagement(new File(".")))
-        DescriptionRule rule = new DescriptionRule()
         job.description('something')
         assert !rule.isDefect(job)
     }
@@ -102,7 +99,6 @@ class DescriptionRuleTest {
     @Test
     void testWorkflowJobWithDescription() {
         Item job = new WorkflowJob()
-        DescriptionRule rule = new DescriptionRule()
         job.description('something')
         assert !rule.isDefect(job)
     }
@@ -110,7 +106,6 @@ class DescriptionRuleTest {
     @Test
     void testBuildFlowJobWithDescription() {
         Item job = new BuildFlowJob()
-        DescriptionRule rule = new DescriptionRule()
         job.description('something')
         assert !rule.isDefect(job)
     }
@@ -118,7 +113,6 @@ class DescriptionRuleTest {
     @Test
     void testIvyJobWithDescription() {
         Item job = new IvyJob()
-        DescriptionRule rule = new DescriptionRule()
         job.description('something')
         assert !rule.isDefect(job)
     }
