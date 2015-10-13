@@ -14,3 +14,8 @@ JenkinsLint requires
 AVAILABLE FROM MAVEN CENTRAL REPOSITORY
 
 TODO
+- remove generated stdout from the command line
+- verbose output flag
+- reports
+- ant support
+- gradle support
