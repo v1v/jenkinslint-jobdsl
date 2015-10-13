@@ -5,6 +5,7 @@ import javaposse.jobdsl.dsl.Item
 import javaposse.jobdsl.dsl.jobs.FreeStyleJob
 import javaposse.jobdsl.dsl.jobs.MatrixJob
 import javaposse.jobdsl.dsl.jobs.MavenJob
+import javaposse.jobdsl.dsl.jobs.MultiJob
 import org.junit.Test
 
 /**
@@ -36,6 +37,13 @@ class DescriptionRuleTest {
     }
 
     @Test
+    void testMultiJobWithoutDescription() {
+        Item job = new MultiJob(new FileJobManagement(new File(".")))
+        DescriptionRule rule = new DescriptionRule()
+        assert rule.isDefect(job)
+    }
+
+    @Test
     void testFreeStyleJobWithDescription() {
         Item job = new FreeStyleJob()
         job.description('something')
@@ -56,6 +64,14 @@ class DescriptionRuleTest {
         Item job = new MatrixJob()
         job.description('something')
         DescriptionRule rule = new DescriptionRule()
+        assert !rule.isDefect(job)
+    }
+
+    @Test
+    void testMultiJobWithDescription() {
+        Item job = new MultiJob(new FileJobManagement(new File(".")))
+        DescriptionRule rule = new DescriptionRule()
+        job.description('something')
         assert !rule.isDefect(job)
     }
 }
