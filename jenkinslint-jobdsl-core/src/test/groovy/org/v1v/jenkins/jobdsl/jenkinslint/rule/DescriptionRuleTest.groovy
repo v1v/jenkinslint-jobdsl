@@ -27,94 +27,94 @@ class DescriptionRuleTest {
     }
 
     @Test
-    void testFreeStyleJobWithoutDescription() {
-        Item job = new FreeStyleJob()
-        assert rule.isDefect(job)
-    }
-
-    @Test
-    void testMavenJobWithoutDescription() {
-        Item job = new MavenJob(new FileJobManagement(new File(".")))
-        assert rule.isDefect(job)
-    }
-
-    @Test
-    void testMatrixJobWithoutDescription() {
-        Item job = new MatrixJob()
-        assert rule.isDefect(job)
-    }
-
-    @Test
-    void testMultiJobWithoutDescription() {
-        Item job = new MultiJob(new FileJobManagement(new File(".")))
-        assert rule.isDefect(job)
-    }
-
-    @Test
-    void testWorkflowJobWithoutDescription() {
-        Item job = new WorkflowJob()
-        assert rule.isDefect(job)
-    }
-
-    @Test
-    void testBuildFlowJobWithoutDescription() {
-        Item job = new BuildFlowJob()
-        assert rule.isDefect(job)
-    }
-
-    @Test
-    void testIvyJobWithoutDescription() {
-        Item job = new IvyJob()
-        assert rule.isDefect(job)
-    }
-
-    @Test
-    void testFreeStyleJobWithDescription() {
+    void testFreeStyleJob() {
         Item job = new FreeStyleJob()
         job.description('something')
         assert !rule.isDefect(job)
     }
 
     @Test
-    void testMavenJobWithDescription() {
+    void testMavenJob() {
         Item job = new MavenJob(new FileJobManagement(new File(".")))
         job.description('something')
         assert !rule.isDefect(job)
     }
 
     @Test
-    void testMatrixJobWithDescription() {
+    void testMatrixJob() {
         Item job = new MatrixJob()
         job.description('something')
         assert !rule.isDefect(job)
     }
 
     @Test
-    void testMultiJobWithDescription() {
+    void testMultiJob() {
         Item job = new MultiJob(new FileJobManagement(new File(".")))
         job.description('something')
         assert !rule.isDefect(job)
     }
 
     @Test
-    void testWorkflowJobWithDescription() {
+    void testWorkflowJob() {
         Item job = new WorkflowJob()
         job.description('something')
         assert !rule.isDefect(job)
     }
 
     @Test
-    void testBuildFlowJobWithDescription() {
+    void testBuildFlowJob() {
         Item job = new BuildFlowJob()
         job.description('something')
         assert !rule.isDefect(job)
     }
 
     @Test
-    void testIvyJobWithDescription() {
+    void testIvyJob() {
         Item job = new IvyJob()
         job.description('something')
         assert !rule.isDefect(job)
+    }
+
+    @Test
+    void testFreeStyleJobWithDefect() {
+        Item job = new FreeStyleJob()
+        assert rule.isDefect(job)
+    }
+
+    @Test
+    void testMavenJobWithDefect() {
+        Item job = new MavenJob(new FileJobManagement(new File(".")))
+        assert rule.isDefect(job)
+    }
+
+    @Test
+    void testMatrixJobWithDefect() {
+        Item job = new MatrixJob()
+        assert rule.isDefect(job)
+    }
+
+    @Test
+    void testMultiJobWithDefect() {
+        Item job = new MultiJob(new FileJobManagement(new File(".")))
+        assert rule.isDefect(job)
+    }
+
+    @Test
+    void testWorkflowJobWithDefect() {
+        Item job = new WorkflowJob()
+        assert rule.isDefect(job)
+    }
+
+    @Test
+    void testBuildFlowJobWithDefect() {
+        Item job = new BuildFlowJob()
+        assert rule.isDefect(job)
+    }
+
+    @Test
+    void testIvyJobWithDefect() {
+        Item job = new IvyJob()
+        assert rule.isDefect(job)
     }
 
     @Test
@@ -130,7 +130,9 @@ class DescriptionRuleTest {
 
     private testIgnoredDescription (Item item) {
         assert !rule.isIgnored(item)
+        assert rule.isDefect(item)
         item.description(rule.getName())
         assert rule.isIgnored(item)
+        assert !rule.isDefect(item)
     }
 }
