@@ -1,0 +1,3 @@
+job ('blabla') {
+    label 'blabla'
+}

@@ -1,0 +1,3 @@
+rootProject.name = 'jenkinslint-jobdsl-root'
+include 'jenkinslint-jobdsl-core'
+include 'jenkinslint-jobdsl-gradle-plugin'

@@ -1,0 +1,2 @@
+apply plugin: 'application'
+mainClassName = "org.v1v.jenkins.jobdsl.jenkinslint.JenkinsLint"
