@@ -1,6 +1,7 @@
 allprojects {
     apply plugin: 'groovy'
     apply plugin: 'idea'
+    apply plugin: 'codenarc'
 
     group = 'org.v1v.gradle.plugins.jenkinslint'
     version = '0.1'
@@ -21,6 +22,11 @@ allprojects {
 
         compile localGroovy()
         compile gradleApi()
+    }
+
+    codenarc {
+        toolVersion = '0.24'
+        configFile = file("../config/codenarc/rules.groovy")
     }
 }
 
