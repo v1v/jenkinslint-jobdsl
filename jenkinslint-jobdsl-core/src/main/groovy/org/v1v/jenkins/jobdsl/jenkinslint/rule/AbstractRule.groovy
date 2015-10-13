@@ -22,7 +22,6 @@ public abstract class AbstractRule implements Rule {
 
     protected String name;
 
-
     /**
      * Allows rules to perform validation. Do nothing by default.
      * This method is provided as a placeholder so subclasses can optionally override.
@@ -38,6 +37,15 @@ public abstract class AbstractRule implements Rule {
     public void validate() {
     }
 
+    @Override
+    boolean isIgnored(Item item) {
+        boolean ignored = false
+        if (item != null && item.getNode().get('description') != null &&
+                item.getNode().get('description').text().toLowerCase().contains(this.name.toLowerCase())) {
+            ignored = true
+        }
+        return ignored
+    }
 
     public boolean isEnabled() {
         return enabled;

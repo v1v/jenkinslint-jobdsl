@@ -7,6 +7,8 @@ import javaposse.jobdsl.dsl.Item
  */
 public interface Rule {
 
-
     boolean isDefect(Item item);
+
+    boolean isIgnored(Item item);
+
 }

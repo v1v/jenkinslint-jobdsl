@@ -117,4 +117,20 @@ class LabelRuleTest {
         assert !rule.isDefect(job)
     }
 
+    @Test
+    void testIgnoredRule() {
+        testIgnoredDescription(new FreeStyleJob())
+        testIgnoredDescription(new MavenJob(new FileJobManagement(new File("."))))
+        testIgnoredDescription(new MatrixJob())
+        testIgnoredDescription(new MultiJob(new FileJobManagement(new File("."))))
+        testIgnoredDescription(new WorkflowJob())
+        testIgnoredDescription(new BuildFlowJob())
+        testIgnoredDescription(new IvyJob())
+    }
+
+    private testIgnoredDescription (Item item) {
+        assert !rule.isIgnored(item)
+        item.description(rule.getName())
+        assert rule.isIgnored(item)
+    }
 }

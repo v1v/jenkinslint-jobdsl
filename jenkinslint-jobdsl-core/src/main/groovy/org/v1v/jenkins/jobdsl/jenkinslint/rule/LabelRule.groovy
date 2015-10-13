@@ -14,12 +14,15 @@ class LabelRule extends AbstractRule{
 
     public boolean isDefect(Item item) {
         boolean defect = true
-        if (item.getNode() != null &&
-                item.getNode().get('assignedNode') != null &&
-                !item.getNode().get('assignedNode').text().equals("")) {
+        if (!isIgnored(item)) {
+            if (item.getNode() != null &&
+                    item.getNode().get('assignedNode') != null &&
+                    !item.getNode().get('assignedNode').text().equals("")) {
+                defect = false
+            }
+        } else {
             defect = false
         }
-
         return defect
     }
 }

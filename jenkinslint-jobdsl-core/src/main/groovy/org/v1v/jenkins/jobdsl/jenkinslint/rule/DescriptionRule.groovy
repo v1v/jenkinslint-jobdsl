@@ -11,13 +11,19 @@ class DescriptionRule extends AbstractRule{
         description = 'Description of description'
     }
 
+    @Override
     public boolean isDefect(Item item) {
         boolean defect = true
-        if (item.getNode() != null &&
-                item.getNode().get('description') != null &&
-                !item.getNode().get('description').text().equals("")) {
+        if (!isIgnored(item)) {
+            if (item.getNode() != null &&
+                    item.getNode().get('description') != null &&
+                    !item.getNode().get('description').text().equals("")) {
+                defect = false
+            }
+        } else {
             defect = false
         }
         return defect
     }
+
 }
