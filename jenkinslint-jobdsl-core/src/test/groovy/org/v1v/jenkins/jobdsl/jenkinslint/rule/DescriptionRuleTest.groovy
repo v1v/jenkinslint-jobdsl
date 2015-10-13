@@ -54,7 +54,7 @@ class DescriptionRuleTest {
     }
 
     @Test
-    void testBuildflowJobWithoutDescription() {
+    void testBuildFlowJobWithoutDescription() {
         Item job = new BuildFlowJob()
         DescriptionRule rule = new DescriptionRule()
         assert rule.isDefect(job)
@@ -108,7 +108,7 @@ class DescriptionRuleTest {
     }
 
     @Test
-    void testBuildflowJobWithDescription() {
+    void testBuildFlowJobWithDescription() {
         Item job = new BuildFlowJob()
         DescriptionRule rule = new DescriptionRule()
         job.description('something')
