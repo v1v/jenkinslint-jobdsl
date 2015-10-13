@@ -2,9 +2,9 @@ package org.v1v.jenkins.jobdsl.jenkinslint
 
 import java.util.logging.Logger
 
-class LintRunner {
+class JenkinsLintRunner {
 
-    private static final LOG = Logger.getLogger(LintRunner.class.getName())
+    private static final LOG = Logger.getLogger(JenkinsLintRunner.class.getName())
 
     FileSetAnalyzer fileSetAnalyzer
 

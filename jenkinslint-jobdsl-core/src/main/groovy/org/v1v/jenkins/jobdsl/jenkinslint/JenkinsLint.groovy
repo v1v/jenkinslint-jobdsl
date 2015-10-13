@@ -30,8 +30,8 @@ Usage: java Jenkins [OPTIONS]
     protected String excludes
 
 
-    // Abstract creation of the LintRunner instance to allow substitution of test spy for unit tests
-    protected createLintRunner = { new LintRunner() }
+    // Abstract creation of the JenkinsLintRunner instance to allow substitution of test spy for unit tests
+    protected createLintRunner = { new JenkinsLintRunner() }
 
     // Abstract calling System.exit() to allow substitution of test spy for unit tests
     protected static systemExit = { exitCode -> System.exit(exitCode) }

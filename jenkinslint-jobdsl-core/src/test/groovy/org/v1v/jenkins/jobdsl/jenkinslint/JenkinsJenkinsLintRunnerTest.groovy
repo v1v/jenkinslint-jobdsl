@@ -1,7 +1,6 @@
 package org.v1v.jenkins.jobdsl.jenkinslint
 
 import org.apache.log4j.Logger
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
@@ -12,11 +11,11 @@ import static org.v1v.jenkins.jobdsl.jenkinslint.TestUtil.shouldFailWithMessageC
  *
  * @author victor.martinez.
  */
-class JenkinsLintRunnerTest {
+class JenkinsJenkinsLintRunnerTest {
 
     private static final SOURCE_DIRS = ['abc']
 
-    private LintRunner lintRunner
+    private JenkinsLintRunner lintRunner
 
     protected final LOG = Logger.getLogger(getClass())
 
@@ -47,6 +46,6 @@ class JenkinsLintRunnerTest {
 
     @Before
     void setUpLintRunnerTest() {
-        lintRunner = new LintRunner()
+        lintRunner = new JenkinsLintRunner()
     }
 }
