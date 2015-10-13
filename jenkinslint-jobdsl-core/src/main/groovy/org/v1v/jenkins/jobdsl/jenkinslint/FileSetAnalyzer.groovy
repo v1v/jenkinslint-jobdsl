@@ -47,7 +47,7 @@ class FileSetAnalyzer {
     private WildcardPattern includesPattern
     private WildcardPattern excludesPattern
 
-    private final items = []
+    private final items = [:]
 
     void analyze(List rules) {
         assert baseDirectory
@@ -82,7 +82,7 @@ class FileSetAnalyzer {
 
         rules.each { rule ->
             items.each { item ->
-                println "${rule} - ${rule.isDefect(item)}"
+                println "${item.name} - ${rule} - ${rule.isDefect(item)}"
             }
         }
     }
@@ -93,14 +93,14 @@ class FileSetAnalyzer {
      */
     void addItem(Item item) {
         assert item != null
-        items << item
+        items.put(item.name, item)
     }
 
     /**
      * @return a List of Rule objects. The returned List is immutable.
      */
     List getItems() {
-        items.asImmutable()
+        items.values().toArray()
     }
 
     protected boolean matches(File sourceFile) {

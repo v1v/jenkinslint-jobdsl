@@ -17,10 +17,6 @@ class JenkinsLintRunner {
 
         fileSetAnalyzer.analyze(ruleSet.getRules())
 
-        fileSetAnalyzer.getItems().each {
-            println it.name
-        }
-
         def resultsMessage = "JenkinsLint completed: ${elapsedTime}ms"
         println resultsMessage
     }
