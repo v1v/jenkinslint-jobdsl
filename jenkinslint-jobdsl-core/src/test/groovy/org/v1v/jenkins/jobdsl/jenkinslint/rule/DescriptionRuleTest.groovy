@@ -2,6 +2,7 @@ package org.v1v.jenkins.jobdsl.jenkinslint.rule
 
 import javaposse.jobdsl.dsl.FileJobManagement
 import javaposse.jobdsl.dsl.Item
+import javaposse.jobdsl.dsl.jobs.BuildFlowJob
 import javaposse.jobdsl.dsl.jobs.FreeStyleJob
 import javaposse.jobdsl.dsl.jobs.MatrixJob
 import javaposse.jobdsl.dsl.jobs.MavenJob
@@ -52,6 +53,13 @@ class DescriptionRuleTest {
     }
 
     @Test
+    void testBuildflowJobWithoutDescription() {
+        Item job = new BuildFlowJob()
+        DescriptionRule rule = new DescriptionRule()
+        assert rule.isDefect(job)
+    }
+
+    @Test
     void testFreeStyleJobWithDescription() {
         Item job = new FreeStyleJob()
         job.description('something')
@@ -86,6 +94,14 @@ class DescriptionRuleTest {
     @Test
     void testWorkflowJobWithDescription() {
         Item job = new WorkflowJob()
+        DescriptionRule rule = new DescriptionRule()
+        job.description('something')
+        assert !rule.isDefect(job)
+    }
+
+    @Test
+    void testBuildflowJobWithDescription() {
+        Item job = new BuildFlowJob()
         DescriptionRule rule = new DescriptionRule()
         job.description('something')
         assert !rule.isDefect(job)
