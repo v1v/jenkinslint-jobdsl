@@ -64,12 +64,22 @@ Usage: java Jenkins [OPTIONS]
         parseArgs(args)
         setDefaultsIfNecessary()
         def lintRunner = createLintRunner()
+        def fileSet = createFileSet()
+        lintRunner.fileSetAnalyzer = fileSet
         lintRunner.execute()
     }
 
     protected void setDefaultsIfNecessary() {
         baseDir = baseDir ?: '.'
         includes = includes ?: '**/*.groovy'
+    }
+
+    /**
+     * Create and return the FileSet
+     * @return a configured FileSet instance
+     */
+    protected FileSetAnalyzer createFileSet() {
+        new FileSetAnalyzer(baseDirectory: baseDir, includes: includes, excludes: excludes)
     }
 
     protected void parseArgs(String[] args) {

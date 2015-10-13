@@ -9,6 +9,8 @@ import static org.v1v.jenkins.jobdsl.jenkinslint.TestUtil.captureSystemOut
 import static org.v1v.jenkins.jobdsl.jenkinslint.TestUtil.shouldFailWithMessageContaining
 
 /**
+ * Tests for Lint command-line runner
+ *
  * @author victor.martinez.
  */
 class LintTest {
@@ -73,7 +75,43 @@ class LintTest {
     }
 
     @Test
+    void testExecute() {
+        final ARGS = [
+                "-basedir=$BASE_DIR", "-includes=$INCLUDES",
+                "-excludes=$EXCLUDES"] as String[]
+
+        def lintRunner = [execute: { }]
+        lint.createLintRunner = { lintRunner }
+
+        lint.execute(ARGS)
+
+        assert lint.includes == INCLUDES
+        assert lint.excludes == EXCLUDES
+
+        def fileSetAnalyzer = lintRunner.fileSetAnalyzer
+        assert fileSetAnalyzer.class == FileSetAnalyzer
+        assert fileSetAnalyzer.baseDirectory == BASE_DIR
+        assert fileSetAnalyzer.includes == INCLUDES
+        assert fileSetAnalyzer.excludes == EXCLUDES
+
+        assert exitCode == 0
+    }
+
+    @Test
     void testExecute_NoArgs() {
+        final ARGS = [] as String[]
+
+        def lintRunner = [execute: { }]
+        lint.createLintRunner = { lintRunner }
+
+        lint.execute(ARGS)
+
+        assert lint.includes == '**/*.groovy'
+        assert lint.excludes == null
+
+        assert lintRunner.fileSetAnalyzer.class == FileSetAnalyzer
+        assert lintRunner.fileSetAnalyzer.baseDirectory == '.'
+
         assert exitCode == 0
     }
 

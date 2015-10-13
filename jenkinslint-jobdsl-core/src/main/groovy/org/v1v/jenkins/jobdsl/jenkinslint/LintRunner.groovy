@@ -6,12 +6,19 @@ class LintRunner {
 
     private static final LOG = Logger.getLogger(LintRunner.class.getName())
 
+    FileSetAnalyzer fileSetAnalyzer
+
     void execute() {
+        assert fileSetAnalyzer, 'The fileSetAnalyzer property must be set to a valid FileSet'
+
         def startTime = System.currentTimeMillis()
         def ruleSet = createRuleSet()
         def elapsedTime = System.currentTimeMillis() - startTime
-        ruleSet.getRules().each {
-            println it
+
+        fileSetAnalyzer.analyze(ruleSet.getRules())
+
+        fileSetAnalyzer.getItems().each {
+            println it.name
         }
 
         def resultsMessage = "Lint completed: ${elapsedTime}ms"
